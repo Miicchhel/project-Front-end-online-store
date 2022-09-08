@@ -16,7 +16,7 @@ function App() {
         >
           Learn React
         </a>
-        <span>para o push requisito 1...:D</span>
+        <span>para o push requisito 1</span>
       </header>
     </div>
   );
