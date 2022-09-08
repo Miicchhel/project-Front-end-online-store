@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Categories extends React.Component {
   render() {
@@ -17,5 +18,9 @@ class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = {
+  dataCategories: PropTypes.arrayOf.isRequired,
+};
 
 export default Categories;
