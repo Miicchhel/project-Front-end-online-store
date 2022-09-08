@@ -1,23 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+// import {
+//   getCategories,
+//   getProductsFromCategoryAndQuery,
+//   getProductById,
+// } from './services/api';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>Edit src/App.js and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <span>para o push requisito 1</span>
-      </header>
+      {/* {console.log(getCategories())}
+      {console.log(getProductsFromCategoryAndQuery('agro'))}
+      {console.log(getProductById('MLB1415456890'))} */}
     </div>
   );
 }
