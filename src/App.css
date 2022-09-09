@@ -25,7 +25,14 @@ html {
   padding: 6px 0;
 }
 
+.container__categires p:hover {
+  background-color: rgb(148, 114, 20);
+  font-size: 20px;
+  padding: 5px;
+}
+
 .input__checkbox {
+  display: none;
   margin-right: 5px;
 }
 
@@ -69,7 +76,7 @@ html {
   width: 95%;
 }
 
-a {
+.cart {
   background-color: rgb(230, 181, 46);
   border-radius: 15px;
   color: #323232;
@@ -81,7 +88,7 @@ a {
   transition: all 300ms;
 }
 
-a:hover {
+.cart:hover {
   font-size: 18px;
 }
 
