@@ -4,9 +4,9 @@
 }
 
 html {
-  height: 100vh;
   background-color: #323232;
-  color:white;
+  color: white;
+  height: 100vh;
 }
 
 .container {
