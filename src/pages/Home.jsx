@@ -36,8 +36,13 @@ class Home extends React.Component {
   render() {
     const { dataCategories, dataCard } = this.state;
     return (
-      <div>
-        <div>
+      <section className="container">
+        <aside className="container__categires">
+          <Categories
+            dataCategories={ dataCategories }
+          />
+        </aside>
+        <section className="container__box">
           <input type="text" data-testid="query-input" onChange={ this.handleName } />
           <button
             type="button"
@@ -49,7 +54,8 @@ class Home extends React.Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-        </div>
+          <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
+        </section>
         { dataCard.length !== 0
           ? (
             <div>
@@ -63,13 +69,7 @@ class Home extends React.Component {
               ))}
             </div>)
           : <p>Nenhum produto foi encontrado</p> }
-        <div>
-          <Categories
-            dataCategories={ dataCategories }
-          />
-        </div>
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
-      </div>
+      </section>
     );
   }
 }
