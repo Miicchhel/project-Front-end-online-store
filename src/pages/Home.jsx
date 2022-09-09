@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories,
+  getProductFromCategory,
+  getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from '../Components/Categories';
 import Card from '../Components/Card';
 
@@ -9,6 +11,7 @@ class Home extends React.Component {
     nameInput: '',
     dataCategories: [],
     dataCard: [],
+    dataProductsFromCategories: [],
   };
 
   async componentDidMount() {
@@ -33,13 +36,23 @@ class Home extends React.Component {
     });
   };
 
+  handleProduct = async (event) => {
+    const products = await getProductFromCategory(event.target.id);
+    this.setState({
+      dataProductsFromCategories: products.results,
+    });
+  };
+
   render() {
-    const { dataCategories, dataCard } = this.state;
+    const { dataCategories,
+      dataCard,
+      dataProductsFromCategories } = this.state;
     return (
       <section className="container">
         <aside className="container__categires">
           <Categories
             dataCategories={ dataCategories }
+            handleProduct={ this.handleProduct }
           />
         </aside>
         <section className="container__box">
@@ -69,6 +82,16 @@ class Home extends React.Component {
                 ))}
               </div>)
             : <p>Nenhum produto foi encontrado</p> }
+          <div className="container__box__card">
+            {dataProductsFromCategories.map((products, index) => (
+              <Card
+                data-testid="product"
+                name={ products.title }
+                price={ products.price }
+                image={ products.thumbnail }
+                key={ index }
+              />))}
+          </div>
         </section>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
       </section>
