@@ -74,6 +74,7 @@ class Home extends React.Component {
               <div className="container__box__card">
                 {dataCard.map((item, index) => (
                   <Card
+                    productId={ item.id }
                     name={ item.title }
                     price={ item.price }
                     image={ item.thumbnail }
@@ -85,6 +86,7 @@ class Home extends React.Component {
           <div className="container__box__card">
             {dataProductsFromCategories.map((products, index) => (
               <Card
+                productId={ products.id }
                 data-testid="product"
                 name={ products.title }
                 price={ products.price }
@@ -93,7 +95,13 @@ class Home extends React.Component {
               />))}
           </div>
         </section>
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
+        <Link
+          to="/cart"
+          className="cart"
+          data-testid="shopping-cart-button"
+        >
+          Carrinho de compras
+        </Link>
       </section>
     );
   }
