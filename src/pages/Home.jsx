@@ -43,32 +43,34 @@ class Home extends React.Component {
           />
         </aside>
         <section className="container__box">
-          <input type="text" data-testid="query-input" onChange={ this.handleName } />
-          <button
-            type="button"
-            data-testid="query-button"
-            onClick={ this.handleClick }
-          >
-            Pesquisar
-          </button>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
+          <div className="container__box__busca">
+            <input type="text" data-testid="query-input" onChange={ this.handleName } />
+            <button
+              type="button"
+              data-testid="query-button"
+              onClick={ this.handleClick }
+            >
+              Pesquisar
+            </button>
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          </div>
+          { dataCard.length !== 0
+            ? (
+              <div className="container__box__card">
+                {dataCard.map((item, index) => (
+                  <Card
+                    name={ item.title }
+                    price={ item.price }
+                    image={ item.thumbnail }
+                    key={ index }
+                  />
+                ))}
+              </div>)
+            : <p>Nenhum produto foi encontrado</p> }
         </section>
-        { dataCard.length !== 0
-          ? (
-            <div>
-              {dataCard.map((item, index) => (
-                <Card
-                  name={ item.title }
-                  price={ item.price }
-                  image={ item.thumbnail }
-                  key={ index }
-                />
-              ))}
-            </div>)
-          : <p>Nenhum produto foi encontrado</p> }
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho de compras</Link>
       </section>
     );
   }
