@@ -8,7 +8,12 @@ class Categories extends React.Component {
       <div>
         {dataCategories.map((categorias) => (
           <p key={ categorias.id }>
-            <input data-testid="category" type="checkbox" id={ categorias.id } />
+            <input
+              data-testid="category"
+              type="checkbox"
+              id={ categorias.id }
+              className="input__checkbox"
+            />
             <label data-testid htmlFor={ categorias.id }>
               {categorias.name}
             </label>
