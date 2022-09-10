@@ -82,6 +82,7 @@ class Home extends React.Component {
                     name={ item.title }
                     price={ item.price }
                     image={ item.thumbnail }
+                    quantity={ 1 }
                     key={ index }
                   />
                 ))}
@@ -107,7 +108,7 @@ class Home extends React.Component {
           Carrinho de compras
           <p data-testid="shopping-cart-product-quantity">
             Total de produtos:
-            {cart.length}
+            {/* {cart.length} */}
           </p>
         </Link>
       </section>

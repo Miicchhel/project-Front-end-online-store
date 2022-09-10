@@ -5,8 +5,8 @@ import addProduct from '../services/localStorage';
 
 class Card extends React.Component {
   saveCart = () => {
-    const { name, price, image, id } = this.props;
-    const meuObj = { name, price, image, id };
+    const { name, price, image, quantity, id } = this.props;
+    const meuObj = { name, price, image, quantity, id };
     addProduct(meuObj);
   };
 
