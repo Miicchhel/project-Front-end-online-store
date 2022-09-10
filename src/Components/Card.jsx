@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import addProduct from '../services/localStorage';
 
 class Card extends React.Component {
+  saveCart = () => {
+    const { name, price, image, productId } = this.props;
+    const meuObj = { name, price, image, productId };
+    addProduct(meuObj);
+  };
+
   render() {
     const { name, price, image, productId } = this.props;
     return (
@@ -13,9 +20,11 @@ class Card extends React.Component {
             <h2>{name}</h2>
             <h3>{price}</h3>
             <h3>{productId}</h3>
-            {/* <Link to="/cart">Informações</Link> */}
           </div>
         </Link>
+        <button type="button" data-testid="product-add-to-cart" onClick={ this.saveCart }>
+          Adiciona ao carrinho
+        </button>
       </div>
     );
   }

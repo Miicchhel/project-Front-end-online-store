@@ -12,12 +12,15 @@ class Home extends React.Component {
     dataCategories: [],
     dataCard: [],
     dataProductsFromCategories: [],
+    cart: [],
   };
 
   async componentDidMount() {
     const dataCategories = await getCategories();
+    const get = JSON.parse(localStorage.getItem('cart_items'));
     this.setState({
       dataCategories,
+      cart: get,
     });
   }
 
@@ -46,7 +49,8 @@ class Home extends React.Component {
   render() {
     const { dataCategories,
       dataCard,
-      dataProductsFromCategories } = this.state;
+      dataProductsFromCategories,
+      cart } = this.state;
     return (
       <section className="container">
         <aside className="container__categires">
@@ -101,6 +105,10 @@ class Home extends React.Component {
           data-testid="shopping-cart-button"
         >
           Carrinho de compras
+          <p data-testid="shopping-cart-product-quantity">
+            Total de produtos:
+            {cart.length}
+          </p>
         </Link>
       </section>
     );
