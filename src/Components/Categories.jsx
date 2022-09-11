@@ -26,7 +26,10 @@ class Categories extends React.Component {
 }
 
 Categories.propTypes = {
-  dataCategories: PropTypes.arrayOf.isRequired,
+  dataCategories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  })).isRequired,
   handleProduct: PropTypes.func.isRequired,
 };
 
