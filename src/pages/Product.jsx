@@ -13,6 +13,7 @@ export default class Product extends React.Component {
     email: '',
     available: false,
     rate: '',
+    quantity: 1,
   };
 
   async componentDidMount() {

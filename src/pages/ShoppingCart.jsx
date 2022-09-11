@@ -3,59 +3,75 @@ import React from 'react';
 class ShoppingCart extends React.Component {
   state = {
     cart: [],
-    quantity: [],
+    totalProdutos: 0,
   };
 
   componentDidMount() {
     const get = JSON.parse(localStorage.getItem('cart_items'));
-    const newArray = [];
-    get.forEach((item) => newArray.push(item.quantity));
+    const totalP = get.map((item) => item.quantity);
     this.setState({
       cart: get,
-      quantity: newArray,
+      totalProdutos: this.somaQP(totalP),
     });
   }
 
-  setCart = (newCart) => {
-    const newArray = [];
-    newCart.forEach((item) => newArray.push(item.quantity));
-    this.setState({
-      cart: newCart,
-      quantity: newArray,
-    });
-    localStorage.setItem('cart_items', JSON.stringify(newCart));
-  };
+  somaQP = (array) => (array.reduce((total, num) => (total + num), 0));
 
   removeProduct = (event) => {
     const { cart } = this.state;
     const { id } = event.target;
-    this.setCart(cart.filter((product) => product.id !== id));
-  };
-
-  decreaseQuantity = (index) => {
-    const { quantity } = this.state;
-    if (quantity[index] > 1) {
-      const newValue = quantity[index] - 1;
-      quantity[index] = newValue;
-      this.setState({
-        quantity,
-      });
-    }
-  };
-
-  increaseQuantity = (index) => {
-    const { quantity } = this.state;
-    const newValue = quantity[index] + 1;
-    quantity[index] = newValue;
+    const newCart = cart.filter((item) => item.id !== id);
+    localStorage.setItem('cart_items', JSON.stringify(newCart));
+    const get = JSON.parse(localStorage.getItem('cart_items'));
+    const totalP = get.map((item) => item.quantity);
     this.setState({
-      quantity,
+      cart: get,
+      totalProdutos: this.somaQP(totalP),
+    });
+  };
+
+  saveFavorite = (favorite) => localStorage
+    .setItem('cart_items', JSON.stringify(favorite));
+
+  decreaseQuantity = (event) => {
+    const { cart } = this.state;
+    const { id } = event.target;
+    for (let index = 0; index < cart.length; index += 1) {
+      if (cart[index].id === id) {
+        if (cart[index].quantity > 1) cart[index].quantity -= 1;
+        this.saveFavorite(cart);
+      }
+    }
+    const get = JSON.parse(localStorage.getItem('cart_items'));
+    const totalP = get.map((item) => item.quantity);
+    this.setState({
+      cart: get,
+      totalProdutos: this.somaQP(totalP),
+    });
+  };
+
+  increaseQuantity = (event) => {
+    const { cart } = this.state;
+    const { id } = event.target;
+    for (let index = 0; index < cart.length; index += 1) {
+      if (cart[index].id === id) {
+        if (cart[index].quantity > 1) cart[index].quantity += 1;
+        this.saveFavorite(cart);
+      }
+    }
+    const get = JSON.parse(localStorage.getItem('cart_items'));
+    const totalP = get.map((item) => item.quantity);
+    this.setState({
+      cart: get,
+      totalProdutos: this.somaQP(totalP),
     });
   };
 
   render() {
-    const { cart, quantity } = this.state;
+    const { cart, totalProdutos } = this.state;
     // const { quantity } = this.props;
     // console.log(cart);
+
     return (
       <section>
         ShoppingCart
@@ -77,17 +93,19 @@ class ShoppingCart extends React.Component {
               <button
                 type="button"
                 data-testid="product-decrease-quantity"
-                onClick={ () => this.decreaseQuantity(index) }
+                onClick={ this.decreaseQuantity }
+                id={ items.id }
               >
                 Diminuir
               </button>
               <p>
-                {quantity[index]}
+                {items.quantity}
               </p>
               <button
                 type="button"
                 data-testid="product-increase-quantity"
-                onClick={ () => this.increaseQuantity(index) }
+                onClick={ this.increaseQuantity }
+                id={ items.id }
               >
                 Adicionar
               </button>
@@ -95,8 +113,7 @@ class ShoppingCart extends React.Component {
           ))}
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           <p data-testid="shopping-cart-product-quantity">
-            Total de produtos:
-            {cart.length}
+            { totalProdutos }
           </p>
         </div>
       </section>
