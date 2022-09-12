@@ -12,15 +12,16 @@ class Home extends React.Component {
     dataCategories: [],
     dataCard: [],
     dataProductsFromCategories: [],
-    cart: [],
+    cart: 0,
   };
 
   async componentDidMount() {
     const dataCategories = await getCategories();
     const get = JSON.parse(localStorage.getItem('cart_items'));
+    const totalP = get.map((item) => item.quantity);
     this.setState({
       dataCategories,
-      cart: get,
+      cart: totalP.reduce((total, num) => (total + num), 0),
     });
   }
 
@@ -96,6 +97,7 @@ class Home extends React.Component {
                 name={ products.title }
                 price={ products.price }
                 image={ products.thumbnail }
+                quantity={ 1 }
                 key={ index }
               />))}
           </div>
@@ -107,8 +109,7 @@ class Home extends React.Component {
         >
           Carrinho de compras
           <p data-testid="shopping-cart-product-quantity">
-            Total de produtos:
-            {/* {cart.length} */}
+            {cart}
           </p>
         </Link>
       </section>
