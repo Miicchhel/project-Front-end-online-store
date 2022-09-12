@@ -108,7 +108,7 @@ class Home extends React.Component {
           data-testid="shopping-cart-button"
         >
           Carrinho de compras
-          <p>
+          <p data-testid="shopping-cart-product-quantity">
             {cart}
           </p>
         </Link>

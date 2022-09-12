@@ -55,7 +55,7 @@ class ShoppingCart extends React.Component {
     const { id } = event.target;
     for (let index = 0; index < cart.length; index += 1) {
       if (cart[index].id === id) {
-        if (cart[index].quantity > 1) cart[index].quantity += 1;
+        cart[index].quantity += 1;
         this.saveFavorite(cart);
       }
     }
@@ -98,7 +98,7 @@ class ShoppingCart extends React.Component {
               >
                 Diminuir
               </button>
-              <p>
+              <p data-testid="shopping-cart-product-quantity">
                 {items.quantity}
               </p>
               <button
@@ -112,7 +112,7 @@ class ShoppingCart extends React.Component {
             </div>
           ))}
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-          <p data-testid="shopping-cart-product-quantity">
+          <p>
             { totalProdutos }
           </p>
         </div>
